@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: 10.35.244.69:5000/krithiva/nodejsscan
-  tag: 0.0.10
+  tag: 0.0.11
   pullPolicy: IfNotPresent
 service:
   name: nodejsscan
@@ -23,3 +23,6 @@ resources:
     memory: 128Mi
 ingress:
   enabled: false
+
+podAnnotations:
+  jenkins-x.io/cve-image-id: a89569d1337173b1a39e705cb4993e0652a643f126a0a653be5aa999eee511ba
