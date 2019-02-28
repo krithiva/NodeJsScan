@@ -85,29 +85,11 @@ pipeline {
           container('python') {
 		     sh "pip install --upgrade pip"
              sh "pip install nodejsscan"
-			sh "nodejsscan -d ./charts/nodejsscan -o OUTPUT"
+			sh "nodejsscan -f ./charts/nodejsscan/app.js"
           }
         }
       }
-      stage('Promote to Environments') {
-        when {
-          branch 'master'
-        }
-        steps {
-          dir ('./charts/nodejsscan') {
-            container('python') {
-              sh 'jx step changelog --version v\$(cat ../../VERSION)'
-
-              // release the helm chart
-              sh 'jx step helm release'
-
-              // promote through all 'Auto' promotion Environments
-              sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-            }
-          }
-        }
       }
-    }
     post {
         always {
             cleanWs()
