@@ -83,9 +83,7 @@ pipeline {
             }
           }
           container('python') {
-            sh "virtualenv venv -p python3"
-			sh "source venv/bin/activate"
-            sh "pip install nodejsscan"
+             sh "pip install nodejsscan"
 			sh "nodejsscan -o nodejs.json"
 			sh "cat nodejs.json"
           }
