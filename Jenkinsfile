@@ -83,8 +83,9 @@ pipeline {
             }
           }
           container('python') {
+		     sh "pip install --upgrade pip"
              sh "pip install nodejsscan"
-			sh "nodejsscan  -o OUTPUT"
+			sh "nodejsscan -d ./charts/nodejsscan -o OUTPUT"
           }
         }
       }
