@@ -85,7 +85,7 @@ pipeline {
           container('python') {
 		     sh "pip install --upgrade pip"
              sh "pip install nodejsscan"
-			sh "nodejsscan -f ./charts/nodejsscan/app.js"
+			sh "nodejsscan -d ./charts/nodejsscan/"
           }
         }
       }
