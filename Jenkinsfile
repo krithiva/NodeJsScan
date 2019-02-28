@@ -84,8 +84,7 @@ pipeline {
           }
           container('python') {
              sh "pip install nodejsscan"
-			sh "nodejsscan -o nodejs.json"
-			sh "cat nodejs.json"
+			sh "nodejsscan  -o OUTPUT"
           }
         }
       }
