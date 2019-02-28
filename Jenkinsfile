@@ -63,6 +63,34 @@ pipeline {
           }
         }
       }
+	  stage('Nodejs Scan') {
+        when {
+          branch 'master'
+        }
+        steps {
+          container('python') {
+            // ensure we're not on a detached head
+            sh "git checkout master"
+            sh "git config --global credential.helper store"
+
+            sh "jx step git credentials"
+            // so we can retrieve the version in later steps
+            sh "echo \$(jx-release-version) > VERSION"
+          }
+          dir ('./charts/nodejsscan') {
+            container('python') {
+              sh "make tag"
+            }
+          }
+          container('python') {
+            sh "virtualenv venv -p python3"
+			sh "source venv/bin/activate"
+            sh "pip install nodejsscan"
+			sh "nodejsscan -o nodejs.json
+			sh "cat nodejs.json"
+          }
+        }
+      }
       stage('Promote to Environments') {
         when {
           branch 'master'
