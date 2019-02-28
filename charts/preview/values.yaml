@@ -20,3 +20,5 @@ preview:
     repository:
     tag:
     pullPolicy: IfNotPresent
+podAnnotations:
+  jenkins-x.io/cve-image-id: a89569d1337173b1a39e705cb4993e0652a643f126a0a653be5aa999eee511ba
